@@ -21,7 +21,7 @@ PE = Peb*sb;
 PT = Peb*st + 0.01*Peb;
 PM = Peb*st;
 PH = PS - PM;
-Feed = Peb*1.02;
+Feed = Peb*1.02
 
 
 EPk = 23*PS + 9*PB + 8.5*PT + 4*(0.123*PH + 0.383*PM + 0.596*PE) - 100*16 ;
@@ -30,7 +30,6 @@ EP2 = [EP2; EPk];
 conv = [conv; x];
 
 end 
-
 figure
 plot(conv, EP12)
 title('Economic Potential vs Conversion - Ethylbenzene for Steam ratio of 12:1')
@@ -38,6 +37,7 @@ xlabel('Conversion Ethylbenzene')
 ylabel('Economic Potential: $')
 
 figure
+
 Legend=cell(7,1);
 for i = 6:1:12 
     plot(conv, EP2 - i*100*0.07)
