@@ -1,3 +1,5 @@
+clc
+clear
 
 conv = [];
 EP12 = [];
@@ -11,7 +13,7 @@ at = [0.0006 0.415 -2.48 5.84 -3.437];
 for M = 6:1:12
     EP3 = [];
     conv = [];
-    for x = 0.01:0.01:1
+    for x = 0.01:0.01:0.999
 
     ss = as(1) +as(2)*x + as(3)*x*x + as(4)*x*x*x+ as(5)*x*x*x*x;
     sb = ab(1) +ab(2)*x + ab(3)*x*x + ab(4)*x*x*x+ ab(5)*x*x*x*x;
@@ -27,15 +29,16 @@ for M = 6:1:12
     PH = PS - PM;
 
     Rg = Feed*(1-x)/x;
-    CA_cost = Rg^0.82;
-    CO_cost = Rg;
+    CA_cost = (M/x)^0.82;
+    CO_cost = M/x;
+%     CA_cost = Rg^0.82;
+%     CO_cost = Rg;
     RA_cost = (M/(x*1))^0.33 * (log(1/(1-x)))^0.33;
 
 
-    EP2 = 23*PS + 9*PB + 8.5*PT + 4*(0.123*PH + 0.383*PM + 0.596*PE) - 100*16 -M*100*0.07 ;
-%     EP12 = [EP12; EPk-1200*0.07];
-%     EP3i = EP2-CA_cost-CO_cost-RA_cost;
-    EP3i = EP2;
+    EP2 = 23*PS + 9*PB + 8.5*PT + 4*(0.123*PH + 0.383*PM + 0.596*PE) - Feed*16 -M*Feed*0.07 ;
+    EP3i = EP2-CA_cost-CO_cost-RA_cost;
+%     EP3i = ;
     EP3 = [EP3; EP3i];
     conv = [conv; x];
     
@@ -52,21 +55,4 @@ title('Economic Potential Level 3 vs Conversion - Ethylbenzene')
 xlabel('Conversion Ethylbenzene')
 ylabel('Economic Potential Level 3: $')
 
-% figure
-% plot(conv, EP12)
-% title('Economic Potential vs Conversion - Ethylbenzene for Steam ratio of 12:1')
-% xlabel('Conversion Ethylbenzene')
-% ylabel('Economic Potential: $')
-% 
-% figure
-% Legend=cell(7,1);
-% for i = 6:1:12 
-%     plot(conv, EP2 - i*100*0.07)
-%     Legend{i-5}=strcat('Steam ratio= ', num2str(i),':1');
-%     hold on
-% end
-% legend(Legend,'Location','northeast')
-% title('Economic Potential vs Conversion - Ethylbenzene')
-% xlabel('Conversion Ethylbenzene')
-% ylabel('Economic Potential: $')
  
