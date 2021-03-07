@@ -10,9 +10,10 @@ ab = [0.0006 0.086 -0.158 0.267 0];
 at = [0.0006 0.415 -2.48 5.84 -3.437];
 
 
-for M = 6:1:12
+for i = 6:1:12
     EP3 = [];
     conv = [];
+    M=1/i;
     for x = 0.01:0.01:0.999
 
     ss = as(1) +as(2)*x + as(3)*x*x + as(4)*x*x*x+ as(5)*x*x*x*x;
@@ -45,7 +46,7 @@ for M = 6:1:12
     end
     
     plot(conv, EP3)
-    Legend{M-5}=strcat('Steam ratio= ', num2str(M),':1');
+    Legend{i-5}=strcat('Steam ratio= ', num2str(i),':1');
     hold on
     
 end 
